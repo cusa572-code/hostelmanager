@@ -1,0 +1,520 @@
+type YearlyChartEntry = 
+ record {
+   month: nat;
+   profit: int;
+ };
+type UdharSummary = 
+ record {
+   entries: vec UdharEntry;
+   studentId: StudentId;
+   totalOutstanding: nat;
+ };
+type UdharInput = 
+ record {
+   amount: nat;
+   category: UdharCategory;
+   date: int;
+   description: text;
+   studentId: StudentId;
+ };
+type UdharId = nat;
+type UdharEntry = 
+ record {
+   amount: nat;
+   category: UdharCategory;
+   createdAt: int;
+   date: int;
+   description: text;
+   id: UdharId;
+   isPaid: bool;
+   studentId: StudentId;
+ };
+type UdharCategory = 
+ variant {
+   grocery;
+   milk;
+   other;
+ };
+type SubscriptionStatusResult = 
+ record {
+   daysRemaining: nat;
+   status: SubscriptionStatus;
+ };
+type SubscriptionStatus = 
+ variant {
+   active;
+   expired;
+   trial;
+ };
+type SubscriptionRecord = 
+ record {
+   expiryDate: opt int;
+   planId: opt PlanId;
+   status: SubscriptionStatus;
+   trialStartDate: int;
+   userId: principal;
+ };
+type StudentSummary = 
+ record {
+   id: StudentId;
+   joinDate: int;
+   leaveDate: opt int;
+   name: text;
+   phone: text;
+   roomId: opt RoomId;
+   roomNumber: opt text;
+   status: StudentStatus;
+ };
+type StudentStatus = 
+ variant {
+   active;
+   vacated;
+ };
+type StudentInput = 
+ record {
+   address: text;
+   idProofText: text;
+   joinDate: int;
+   name: text;
+   phone: text;
+   roomId: opt RoomId;
+   seatType: opt SeatType;
+ };
+type StudentId = nat;
+type Student = 
+ record {
+   address: text;
+   createdAt: int;
+   documentKey: opt text;
+   id: StudentId;
+   idProofText: text;
+   joinDate: int;
+   leaveDate: opt int;
+   name: text;
+   phone: text;
+   photoKey: opt text;
+   roomId: opt RoomId;
+   seatType: opt SeatType;
+   status: StudentStatus;
+ };
+type StaffSalaryReport = 
+ record {
+   entries: vec StaffSalaryEntry;
+   month: nat;
+   totalEarned: nat;
+   workingDays: nat;
+   year: nat;
+ };
+type StaffSalaryEntry = 
+ record {
+   earnedSalary: nat;
+   monthlySalary: nat;
+   name: text;
+   presentDays: nat;
+   staffId: StaffId;
+   totalWorkingDays: nat;
+ };
+type StaffInput = 
+ record {
+   joinDate: int;
+   monthlySalary: nat;
+   name: text;
+   role: text;
+ };
+type StaffId = nat;
+type StaffAttendance = 
+ record {
+   date: text;
+   staffId: StaffId;
+   status: AttendanceStatus;
+ };
+type Staff = 
+ record {
+   id: StaffId;
+   isActive: bool;
+   joinDate: int;
+   monthlySalary: nat;
+   name: text;
+   role: text;
+ };
+type SeatType = 
+ variant {
+   typeA;
+   typeB;
+ };
+type SeatSummary = 
+ record {
+   bookedSeatsA: nat;
+   bookedSeatsB: nat;
+   emptySeats: nat;
+   month: nat;
+   pricePerSeatA: Amount;
+   pricePerSeatB: Amount;
+   revenueA: Amount;
+   revenueB: Amount;
+   totalBookedSeats: nat;
+   totalCapacity: nat;
+   totalRevenue: Amount;
+   year: nat;
+ };
+type SeatConfig = 
+ record {
+   pricePerSeatA: Amount;
+   pricePerSeatB: Amount;
+   totalCapacity: nat;
+ };
+type RoomSummary = 
+ record {
+   id: RoomId;
+   occupiedSeats: nat;
+   roomNumber: text;
+   seatCount: nat;
+   status: variant {
+             "empty";
+             full;
+             partial;
+           };
+ };
+type RoomInput = 
+ record {
+   roomNumber: text;
+   seatCount: nat;
+ };
+type RoomId = nat;
+type Room = 
+ record {
+   createdAt: int;
+   id: RoomId;
+   occupiedSeats: nat;
+   roomNumber: text;
+   seatCount: nat;
+ };
+type ReminderId = nat;
+type Reminder = 
+ record {
+   createdAt: int;
+   id: ReminderId;
+   isDone: bool;
+   message: text;
+   remindAt: int;
+   title: text;
+ };
+type PlanId = 
+ variant {
+   annual;
+   biannual;
+   monthly;
+   quarterly;
+ };
+type PaymentStatus = 
+ variant {
+   paid;
+   partial;
+   pending;
+ };
+type PaymentInput = 
+ record {
+   month: nat;
+   note: opt text;
+   paidAmount: nat;
+   rentDue: nat;
+   status: PaymentStatus;
+   studentId: StudentId;
+   year: nat;
+ };
+type PaymentId = nat;
+type Payment = 
+ record {
+   createdAt: int;
+   dueDate: int;
+   id: PaymentId;
+   lateFee: nat;
+   month: nat;
+   note: opt text;
+   paidAmount: nat;
+   paidDate: opt int;
+   rentDue: nat;
+   status: PaymentStatus;
+   studentId: StudentId;
+   year: nat;
+ };
+type NotificationType = 
+ variant {
+   complaintUpdate;
+   emptyRoom;
+   paymentOverdue;
+   rentDue;
+ };
+type NotificationInput = 
+ record {
+   message: text;
+   notifType: NotificationType;
+   relatedId: opt nat;
+   title: text;
+ };
+type NotificationId = nat;
+type Notification = 
+ record {
+   createdAt: int;
+   id: NotificationId;
+   isRead: bool;
+   message: text;
+   notifType: NotificationType;
+   relatedId: opt nat;
+   title: text;
+ };
+type NoteId = nat;
+type Note = 
+ record {
+   content: text;
+   createdAt: int;
+   id: NoteId;
+   title: text;
+   updatedAt: int;
+ };
+type MonthlyStaffExpense = 
+ record {
+   month: nat;
+   presentDays: nat;
+   totalSalary: nat;
+   workingDays: nat;
+   year: nat;
+ };
+type MonthlyProfit = 
+ record {
+   month: nat;
+   profit: int;
+   revenue: Amount;
+   totalExpenses: Amount;
+   year: nat;
+ };
+type MonthlyExpenses = 
+ record {
+   electricity: Amount;
+   key: MonthKey;
+   other: Amount;
+   rent: Amount;
+   staffSalary: Amount;
+ };
+type MonthKey = 
+ record {
+   month: nat;
+   year: nat;
+ };
+type HostelSettings = record {lateFeePerMonth: nat;};
+type ExpenseInput = 
+ record {
+   electricity: Amount;
+   other: Amount;
+   rent: Amount;
+   staffSalary: Amount;
+ };
+type ComplaintStatus = 
+ variant {
+   inProgress;
+   pending;
+   resolved;
+ };
+type ComplaintInput = 
+ record {
+   description: text;
+   roomNumber: text;
+   studentId: opt StudentId;
+ };
+type ComplaintId = nat;
+type Complaint = 
+ record {
+   createdAt: int;
+   description: text;
+   id: ComplaintId;
+   roomNumber: text;
+   status: ComplaintStatus;
+   studentId: opt StudentId;
+   updatedAt: int;
+ };
+type BuildingStats = 
+ record {
+   totalActiveStudents: nat;
+   totalEmptyRooms: nat;
+   totalSeats: nat;
+ };
+type AttendanceStatus = 
+ variant {
+   absent;
+   present;
+ };
+type Amount = nat;
+service : {
+  activateSubscription: (planId: PlanId) -> ();
+  addStaff: (input: StaffInput) -> (variant {
+                                      err: text;
+                                      ok: StaffId;
+                                    });
+  cancelSubscription: () -> ();
+  clearAllNotifications: () -> (variant {
+                                  err: text;
+                                  ok;
+                                });
+  createComplaint: (input: ComplaintInput) ->
+   (variant {
+      err: text;
+      ok: ComplaintId;
+    });
+  createNote: (title: text, content: text) -> (NoteId);
+  createNotification: (input: NotificationInput) ->
+   (variant {
+      err: text;
+      ok: NotificationId;
+    });
+  createPayment: (input: PaymentInput) ->
+   (variant {
+      err: text;
+      ok: PaymentId;
+    });
+  createReminder: (title: text, message: text, remindAt: int) -> (ReminderId);
+  createRoom: (input: RoomInput) -> (variant {
+                                       err: text;
+                                       ok: RoomId;
+                                     });
+  createStudent: (input: StudentInput) ->
+   (variant {
+      err: text;
+      ok: StudentId;
+    });
+  createUdharEntry: (input: UdharInput) -> (variant {
+                                              err: text;
+                                              ok: UdharId;
+                                            });
+  deleteComplaint: (id: ComplaintId) -> (variant {
+                                           err: text;
+                                           ok;
+                                         });
+  deleteNote: (id: NoteId) -> (bool);
+  deletePayment: (id: PaymentId) -> (variant {
+                                       err: text;
+                                       ok;
+                                     });
+  deleteReminder: (id: ReminderId) -> (bool);
+  deleteRoom: (id: RoomId) -> (variant {
+                                 err: text;
+                                 ok;
+                               });
+  deleteStudent: (id: StudentId) -> (variant {
+                                       err: text;
+                                       ok;
+                                     });
+  deleteUdharEntry: (id: UdharId) -> (variant {
+                                        err: text;
+                                        ok;
+                                      });
+  getAttendanceByMonth: (year: nat, month: nat) ->
+   (vec StaffAttendance) query;
+  getBuildingStats: () -> (BuildingStats) query;
+  getComplaints: () -> (vec Complaint) query;
+  getHostelSettings: () -> (HostelSettings) query;
+  getMonthSeatSummary: (year: nat, month: nat) -> (opt SeatSummary) query;
+  getMonthlyExpenses: (year: nat, month: nat) -> (opt MonthlyExpenses) query;
+  getMonthlyProfit: (year: nat, month: nat) -> (MonthlyProfit) query;
+  getMonthlyStaffExpense: (year: nat, month: nat) ->
+   (MonthlyStaffExpense) query;
+  getMySubscription: () -> (opt SubscriptionRecord) query;
+  getMySubscriptionStatus: () -> (SubscriptionStatusResult);
+  getNotes: () -> (vec Note) query;
+  getNotifications: () -> (vec Notification) query;
+  getPayments: () -> (vec Payment) query;
+  getReminders: () -> (vec Reminder) query;
+  getRoom: (id: RoomId) -> (opt Room) query;
+  getRooms: () -> (vec RoomSummary) query;
+  getSeatConfig: () -> (opt SeatConfig) query;
+  getStaff: () -> (vec Staff) query;
+  getStaffAttendance: (staffId: StaffId, year: nat, month: nat) ->
+   (vec StaffAttendance) query;
+  getStaffSalaryReport: (year: nat, month: nat) -> (StaffSalaryReport) query;
+  getStudent: (id: StudentId) -> (opt Student) query;
+  getStudentPayments: (studentId: StudentId) -> (vec Payment) query;
+  getStudentUdhar: (studentId: StudentId) -> (UdharSummary) query;
+  getStudents: () -> (vec StudentSummary) query;
+  getTotalExpenses: (year: nat, month: nat) -> (nat) query;
+  getUdharEntries: () -> (vec UdharEntry) query;
+  getUnreadCount: () -> (nat) query;
+  getYearlyProfitChart: (year: nat) -> (vec YearlyChartEntry) query;
+  markAllNotificationsRead: () -> (variant {
+                                     err: text;
+                                     ok;
+                                   });
+  markAttendance: (staffId: StaffId, date: text, status: AttendanceStatus) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  markNotificationRead: (id: NotificationId) -> (variant {
+                                                   err: text;
+                                                   ok;
+                                                 });
+  markReminderDone: (id: ReminderId) -> (bool);
+  markUdharPaid: (id: UdharId) -> (variant {
+                                     err: text;
+                                     ok;
+                                   });
+  removeStaff: (id: StaffId) -> (variant {
+                                   err: text;
+                                   ok;
+                                 });
+  setMonthlyBooking: (year: nat, month: nat, bookedSeatsA: nat, bookedSeatsB:
+   nat) -> ();
+  setMonthlyExpenses: (year: nat, month: nat, input: ExpenseInput) -> ();
+  setSeatConfig: (totalCapacity: nat, pricePerSeatA: nat, pricePerSeatB:
+   nat) -> ();
+  startTrial: () -> ();
+  stripeWebhook: (userId: principal, planId: PlanId) -> ();
+  updateComplaintStatus: (id: ComplaintId, status: ComplaintStatus) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  updateHostelSettings: (settings: HostelSettings) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  updateNote: (id: NoteId, title: text, content: text) -> (bool);
+  updatePayment: (id: PaymentId, input: PaymentInput) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  updateReminder: (id: ReminderId, title: text, message: text, remindAt:
+   int) -> (bool);
+  updateRoom: (id: RoomId, input: RoomInput) -> (variant {
+                                                   err: text;
+                                                   ok;
+                                                 });
+  updateStaff: (id: StaffId, input: StaffInput) -> (variant {
+                                                      err: text;
+                                                      ok;
+                                                    });
+  updateStudent: (id: StudentId, input: StudentInput) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  updateStudentDocument: (id: StudentId, documentKey: text) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  updateStudentPhoto: (id: StudentId, photoKey: text) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  updateUdharEntry: (id: UdharId, input: UdharInput) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  vacateStudent: (id: StudentId, leaveDate: int) -> (variant {
+                                                       err: text;
+                                                       ok;
+                                                     });
+}

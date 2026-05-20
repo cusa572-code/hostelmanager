@@ -1,0 +1,352 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "DM Sans";
+    --font-mono: "Geist Mono";
+    --radius: 0.625rem;
+
+    --background: 0.145 0.01 260;
+    --foreground: 0.94 0.01 260;
+    --card: 0.18 0.012 260;
+    --card-foreground: 0.94 0.01 260;
+    --popover: 0.22 0.012 260;
+    --popover-foreground: 0.94 0.01 260;
+
+    --primary: 0.65 0.18 155;
+    --primary-foreground: 0.145 0.01 155;
+
+    --secondary: 0.22 0.015 260;
+    --secondary-foreground: 0.85 0.01 260;
+    --muted: 0.22 0.015 260;
+    --muted-foreground: 0.55 0.01 260;
+
+    --accent: 0.72 0.17 70;
+    --accent-foreground: 0.145 0.01 70;
+
+    --destructive: 0.55 0.2 25;
+    --destructive-foreground: 0.94 0.01 25;
+
+    --border: 0.28 0.012 260;
+    --input: 0.28 0.012 260;
+    --ring: 0.65 0.18 155;
+
+    --chart-1: 0.65 0.18 155;
+    --chart-2: 0.72 0.17 70;
+    --chart-3: 0.55 0.18 40;
+    --chart-4: 0.75 0.16 195;
+    --chart-5: 0.6 0.16 15;
+
+    --success: 0.65 0.18 155;
+    --success-foreground: 0.145 0.01 155;
+    --warning: 0.72 0.17 70;
+    --warning-foreground: 0.145 0.01 70;
+
+    --room-empty: 0.65 0.18 155;
+    --room-partial: 0.72 0.17 70;
+    --room-full: 0.55 0.2 25;
+    --payment-paid: 0.65 0.18 155;
+    --payment-pending: 0.72 0.17 70;
+    --payment-overdue: 0.55 0.2 25;
+
+    --sidebar: 0.145 0.01 260;
+    --sidebar-foreground: 0.94 0.01 260;
+    --sidebar-primary: 0.65 0.18 155;
+    --sidebar-primary-foreground: 0.145 0.01 155;
+    --sidebar-accent: 0.22 0.015 260;
+    --sidebar-accent-foreground: 0.85 0.01 260;
+    --sidebar-border: 0.28 0.012 260;
+    --sidebar-ring: 0.65 0.18 155;
+  }
+
+  .dark {
+    --background: 0.145 0.01 260;
+    --foreground: 0.94 0.01 260;
+    --card: 0.18 0.012 260;
+    --card-foreground: 0.94 0.01 260;
+    --popover: 0.22 0.012 260;
+    --popover-foreground: 0.94 0.01 260;
+
+    --primary: 0.65 0.18 155;
+    --primary-foreground: 0.145 0.01 155;
+
+    --secondary: 0.22 0.015 260;
+    --secondary-foreground: 0.85 0.01 260;
+    --muted: 0.22 0.015 260;
+    --muted-foreground: 0.55 0.01 260;
+
+    --accent: 0.72 0.17 70;
+    --accent-foreground: 0.145 0.01 70;
+
+    --destructive: 0.55 0.2 25;
+    --destructive-foreground: 0.94 0.01 25;
+
+    --border: 0.28 0.012 260;
+    --input: 0.28 0.012 260;
+    --ring: 0.65 0.18 155;
+
+    --chart-1: 0.65 0.18 155;
+    --chart-2: 0.72 0.17 70;
+    --chart-3: 0.55 0.18 40;
+    --chart-4: 0.75 0.16 195;
+    --chart-5: 0.6 0.16 15;
+
+    --success: 0.65 0.18 155;
+    --success-foreground: 0.145 0.01 155;
+    --warning: 0.72 0.17 70;
+    --warning-foreground: 0.145 0.01 70;
+
+    --room-empty: 0.65 0.18 155;
+    --room-partial: 0.72 0.17 70;
+    --room-full: 0.55 0.2 25;
+    --payment-paid: 0.65 0.18 155;
+    --payment-pending: 0.72 0.17 70;
+    --payment-overdue: 0.55 0.2 25;
+
+    --sidebar: 0.145 0.01 260;
+    --sidebar-foreground: 0.94 0.01 260;
+    --sidebar-primary: 0.65 0.18 155;
+    --sidebar-primary-foreground: 0.145 0.01 155;
+    --sidebar-accent: 0.22 0.015 260;
+    --sidebar-accent-foreground: 0.85 0.01 260;
+    --sidebar-border: 0.28 0.012 260;
+    --sidebar-ring: 0.65 0.18 155;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .text-xs-label {
+    @apply text-xs font-semibold tracking-widest uppercase;
+  }
+
+  .text-metric-label {
+    @apply text-sm font-semibold text-muted-foreground;
+  }
+
+  .text-metric-value {
+    @apply text-3xl font-bold text-foreground font-display;
+  }
+
+  .kpi-card {
+    @apply bg-card rounded-lg p-4 border border-border;
+  }
+
+  /* Ensure all interactive elements show cursor pointer */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  /* Focus ring utility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-smooth;
+  }
+
+  /* Status badges */
+  .badge-upcoming {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-primary/20 text-primary;
+  }
+
+  .badge-overdue {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-destructive/20 text-destructive;
+  }
+
+  .badge-completed {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-green-500/20 text-green-400;
+  }
+
+  /* Card variant for notes/reminders */
+  .note-card {
+    @apply bg-card border border-border rounded-lg p-4 transition-smooth;
+  }
+
+  .reminder-card {
+    @apply bg-card border border-border rounded-lg p-4 transition-smooth;
+  }
+
+  /* Action button group */
+  .action-buttons {
+    @apply flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-smooth;
+  }
+
+  /* Empty state styling */
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-12 text-center;
+  }
+
+  .empty-state-icon {
+    @apply mb-3 text-muted-foreground;
+  }
+
+  .empty-state-title {
+    @apply text-lg font-semibold text-foreground mb-1;
+  }
+
+  .empty-state-description {
+    @apply text-sm text-muted-foreground mb-6;
+  }
+
+  /* Timestamp styling */
+  .timestamp {
+    @apply text-xs text-muted-foreground;
+  }
+
+  /* Modal overlay */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 flex items-center justify-center;
+  }
+
+  /* Modal content */
+  .modal-content {
+    @apply bg-card border border-border rounded-lg p-6 shadow-lg max-w-md w-full mx-4;
+  }
+
+  /* Input styling for notes/reminders */
+  .form-input {
+    @apply w-full bg-background border border-border rounded-md px-3 py-2 text-foreground placeholder-muted-foreground focus-ring;
+  }
+
+  .form-textarea {
+    @apply w-full bg-background border border-border rounded-md px-3 py-2 text-foreground placeholder-muted-foreground focus-ring resize-none;
+  }
+
+  .form-label {
+    @apply block text-sm font-semibold text-foreground mb-2;
+  }
+
+  /* Primary CTA button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-4 py-2 bg-primary text-primary-foreground rounded-md font-semibold text-sm hover:opacity-90 active:opacity-80 focus-ring disabled:opacity-50;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-4 py-2 bg-secondary text-secondary-foreground rounded-md font-semibold text-sm hover:opacity-90 active:opacity-80 focus-ring disabled:opacity-50;
+  }
+
+  /* Danger button */
+  .btn-danger {
+    @apply inline-flex items-center justify-center px-4 py-2 bg-destructive text-destructive-foreground rounded-md font-semibold text-sm hover:opacity-90 active:opacity-80 focus-ring disabled:opacity-50;
+  }
+
+  /* Ghost button for secondary actions */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-3 py-2 text-foreground hover:bg-muted/30 rounded-md font-medium text-sm focus-ring transition-smooth;
+  }
+
+  /* Room status cards */
+  .room-card {
+    @apply bg-card border border-border rounded-lg p-4 transition-smooth cursor-pointer hover:shadow-md hover:border-primary/30;
+  }
+
+  .room-status-empty {
+    @apply border-l-4 border-l-[oklch(var(--room-empty))];
+  }
+
+  .room-status-partial {
+    @apply border-l-4 border-l-[oklch(var(--room-partial))];
+  }
+
+  .room-status-full {
+    @apply border-l-4 border-l-[oklch(var(--room-full))];
+  }
+
+  /* Payment status badges */
+  .badge-paid {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-[oklch(var(--payment-paid))/20] text-[oklch(var(--payment-paid))];
+  }
+
+  .badge-pending {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-[oklch(var(--payment-pending))/20] text-[oklch(var(--payment-pending))];
+  }
+
+  .badge-overdue {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-[oklch(var(--payment-overdue))/20] text-[oklch(var(--payment-overdue))];
+  }
+
+  /* Complaint status badges */
+  .badge-complaint-pending {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-warning/20 text-warning;
+  }
+
+  .badge-complaint-progress {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-primary/20 text-primary;
+  }
+
+  .badge-complaint-resolved {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-success/20 text-success;
+  }
+
+  /* Student profile card */
+  .student-card {
+    @apply bg-card border border-border rounded-lg p-6 transition-smooth;
+  }
+
+  .student-avatar {
+    @apply w-20 h-20 rounded-lg bg-muted flex items-center justify-center overflow-hidden;
+  }
+
+  /* Udhar/credit ledger */
+  .udhar-entry {
+    @apply bg-card border border-border rounded-lg p-4 flex items-center justify-between transition-smooth hover:opacity-90;
+  }
+
+  .udhar-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/20 text-primary;
+  }
+
+  /* Notification dropdown */
+  .notification-badge {
+    @apply absolute -top-2 -right-2 w-5 h-5 bg-destructive text-destructive-foreground rounded-full flex items-center justify-center text-xs font-bold;
+  }
+
+  .notification-item {
+    @apply px-4 py-3 hover:bg-muted/30 border-b border-border last:border-0 cursor-pointer transition-smooth;
+  }
+
+  /* Language toggle */
+  .lang-toggle {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-md bg-secondary text-secondary-foreground text-xs font-semibold hover:opacity-90 transition-smooth;
+  }
+
+  /* Loading skeleton */
+  .skeleton {
+    @apply animate-pulse bg-muted rounded-md;
+  }
+}

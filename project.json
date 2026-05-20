@@ -1,0 +1,26 @@
+{
+  "overview": "HostelManager is a comprehensive hostel management web app for owners and staff to manage rooms, students, payments, expenses, and finances. Features include bed-wise room allocation with visual grids, student profiles with document uploads, automated fee tracking with late fee calculations, a unique Udhar/credit system, complaint management, in-app notifications, and English/Hindi language support.",
+  "features": [
+    "Room & bed management with visual occupancy grid (green/yellow/red)",
+    "Student profiles with photo and document uploads",
+    "Fee & payment tracking with auto due dates and late fees",
+    "Udhar/credit system for per-student daily credit logs",
+    "Complaint/issue system with status workflow (Pending → In Progress → Resolved)",
+    "In-app notification center for rent due, overdue, and room alerts",
+    "English/Hindi multi-language toggle",
+    "Expense & profit tracking with yearly analytics chart",
+    "Premium subscription model via Stripe",
+    "Role-based access for owner and staff"
+  ],
+  "category": "productivity",
+  "tags": [
+    "hostel",
+    "management",
+    "property",
+    "payments",
+    "students",
+    "finance",
+    "india"
+  ],
+  "last_updated": "2026-04-20T01:13:06.231Z"
+}

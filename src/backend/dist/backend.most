@@ -1,0 +1,256 @@
+// Version: 1.0.0
+type Amount__460182544 = Nat;
+type AttendanceStatus__948412268 = {#absent; #present};
+type ComplaintId__567468167 = Nat;
+type ComplaintStatus__617609589 = {#inProgress; #pending; #resolved};
+type Complaint__445010592 =
+  {
+    createdAt : Int;
+    description : Text;
+    id : ComplaintId__567468167;
+    roomNumber : Text;
+    status : ComplaintStatus__617609589;
+    studentId : ?StudentId__18973552;
+    updatedAt : Int
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type MonthKey__326875830 = {month : Nat; year : Nat};
+type MonthKey__476551247 = MonthKey__326875830;
+type MonthKey__844333910 = MonthKey__326875830;
+type MonthlyBooking__602570520 =
+  {bookedSeatsA : Nat; bookedSeatsB : Nat; key : MonthKey__844333910};
+type MonthlyExpenses__408971800 =
+  {
+    electricity : Amount__460182544;
+    key : MonthKey__476551247;
+    other : Amount__460182544;
+    rent : Amount__460182544;
+    staffSalary : Amount__460182544
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NoteId__94891047 = Nat;
+type Note__1063160515 =
+  {
+    content : Text;
+    createdAt : Int;
+    id : NoteId__94891047;
+    title : Text;
+    updatedAt : Int
+  };
+type NotificationId__261776522 = Nat;
+type NotificationType__908192046 =
+  {#complaintUpdate; #emptyRoom; #paymentOverdue; #rentDue};
+type Notification__264708741 =
+  {
+    createdAt : Int;
+    id : NotificationId__261776522;
+    isRead : Bool;
+    message : Text;
+    notifType : NotificationType__908192046;
+    relatedId : ?Nat;
+    title : Text
+  };
+type PaymentId__1028426357 = Nat;
+type PaymentStatus__296016569 = {#paid; #partial; #pending};
+type Payment__149302498 =
+  {
+    createdAt : Int;
+    dueDate : Int;
+    id : PaymentId__1028426357;
+    lateFee : Nat;
+    month : Nat;
+    note : ?Text;
+    paidAmount : Nat;
+    paidDate : ?Int;
+    rentDue : Nat;
+    status : PaymentStatus__296016569;
+    studentId : StudentId__996419607;
+    year : Nat
+  };
+type PlanId__348022392 = {#annual; #biannual; #monthly; #quarterly};
+type ReminderId__318673956 = Nat;
+type Reminder__263366926 =
+  {
+    createdAt : Int;
+    id : ReminderId__318673956;
+    isDone : Bool;
+    message : Text;
+    remindAt : Int;
+    title : Text
+  };
+type RoomId__226415878 = RoomId__363750221;
+type RoomId__363750221 = Nat;
+type Room__355553194 =
+  {
+    createdAt : Int;
+    id : RoomId__363750221;
+    occupiedSeats : Nat;
+    roomNumber : Text;
+    seatCount : Nat
+  };
+type SeatConfig__953324918 =
+  {
+    pricePerSeatA : Amount__460182544;
+    pricePerSeatB : Amount__460182544;
+    totalCapacity : Nat
+  };
+type SeatType__665619152 = {#typeA; #typeB};
+type StaffAttendance__264400373 =
+  {
+    date : Text;
+    staffId : StaffId__1037175657;
+    status : AttendanceStatus__948412268
+  };
+type StaffId__1037175657 = Nat;
+type Staff__191166072 =
+  {
+    id : StaffId__1037175657;
+    isActive : Bool;
+    joinDate : Int;
+    monthlySalary : Nat;
+    name : Text;
+    role : Text
+  };
+type StudentId__18973552 = StudentId__381756952;
+type StudentId__381756952 = Nat;
+type StudentId__580799361 = StudentId__381756952;
+type StudentId__996419607 = StudentId__381756952;
+type StudentStatus__291312967 = {#active; #vacated};
+type Student__26715999 =
+  {
+    address : Text;
+    createdAt : Int;
+    documentKey : ?Text;
+    id : StudentId__381756952;
+    idProofText : Text;
+    joinDate : Int;
+    leaveDate : ?Int;
+    name : Text;
+    phone : Text;
+    photoKey : ?Text;
+    roomId : ?RoomId__226415878;
+    seatType : ?SeatType__665619152;
+    status : StudentStatus__291312967
+  };
+type SubscriptionRecord__899750378 =
+  {
+    expiryDate : ?Int;
+    planId : ?PlanId__348022392;
+    status : SubscriptionStatus__736202111;
+    trialStartDate : Int;
+    userId : Principal
+  };
+type SubscriptionStatus__736202111 = {#active; #expired; #trial};
+type UdharCategory__640751926 = {#grocery; #milk; #other};
+type UdharEntry__278470448 =
+  {
+    amount : Nat;
+    category : UdharCategory__640751926;
+    createdAt : Int;
+    date : Int;
+    description : Text;
+    id : UdharId__898387564;
+    isPaid : Bool;
+    studentId : StudentId__580799361
+  };
+type UdharId__898387564 = Nat;
+actor {
+  stable attendanceStore :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?StaffAttendance__264400373]];
+      var elementIndex : Nat__490723111
+    };
+  stable complaints :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Complaint__445010592]];
+      var elementIndex : Nat__490723111
+    };
+  stable expenseStore :
+    {
+      var root : Node__46230540<(Nat, Nat), MonthlyExpenses__408971800>;
+      var size : Nat__490723111
+    };
+  stable nextComplaintId : {var value : Nat};
+  stable nextNoteId : {var value : Nat};
+  stable nextNotificationId : {var value : Nat};
+  stable nextPaymentId : {var value : Nat};
+  stable nextReminderId : {var value : Nat};
+  stable nextRoomId : {var value : Nat};
+  stable nextStaffId : {var value : Nat};
+  stable nextStudentId : {var value : Nat};
+  stable nextUdharId : {var value : Nat};
+  stable notes :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Note__1063160515]];
+      var elementIndex : Nat__490723111
+    };
+  stable notifications :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Notification__264708741]];
+      var elementIndex : Nat__490723111
+    };
+  stable paymentSettings :
+    {var root : Node__46230540<Text, Nat>; var size : Nat__490723111};
+  stable payments :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Payment__149302498]];
+      var elementIndex : Nat__490723111
+    };
+  stable reminders :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Reminder__263366926]];
+      var elementIndex : Nat__490723111
+    };
+  stable rooms :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Room__355553194]];
+      var elementIndex : Nat__490723111
+    };
+  stable seatBookings :
+    {
+      var root : Node__46230540<(Nat, Nat), MonthlyBooking__602570520>;
+      var size : Nat__490723111
+    };
+  stable seatConfig :
+    {
+      var root : Node__46230540<Nat, SeatConfig__953324918>;
+      var size : Nat__490723111
+    };
+  stable staffStore :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Staff__191166072]];
+      var elementIndex : Nat__490723111
+    };
+  stable students :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Student__26715999]];
+      var elementIndex : Nat__490723111
+    };
+  stable subscriptions :
+    {
+      var root : Node__46230540<Principal, SubscriptionRecord__899750378>;
+      var size : Nat__490723111
+    };
+  stable udhar :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?UdharEntry__278470448]];
+      var elementIndex : Nat__490723111
+    }
+};
